@@ -1,0 +1,5 @@
+name: CustomHats
+version: '${version}'
+main: com.noodlegamer76.customhats.CustomHats
+api-version: '1.20'
+authors: [noodlegamer76]
