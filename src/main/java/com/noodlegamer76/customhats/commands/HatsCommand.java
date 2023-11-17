@@ -1,5 +1,6 @@
 package com.noodlegamer76.customhats.commands;
 
+import com.noodlegamer76.customhats.CreateHat;
 import com.noodlegamer76.customhats.files.HatsListFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,10 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class HatsCommand implements CommandExecutor {
     @Override
@@ -33,20 +31,15 @@ public class HatsCommand implements CommandExecutor {
                     player.sendMessage("CustomHats Reloaded");
                 }
 
-                if(first.equals("create") && args.length >= 3) {
+                if(first.equals("create") && args.length >= 4) {
 
 
                     if (hats.get(args[1]) == null) {
                         String name = "";
-                        for (int i = 2; i < args.length; i++) {
-                            if (i > 2) {
-                                name += " " + args[i];
-                            }
-                            else {
-                                name += args[i];
-                            }
+                        for (int i = 3; i < args.length; i++) {
+                                name += args[i] + " ";
                         }
-                        hats.set(args[1], name);
+                        hats.set(args[1], List.of(name, args[2]));
                         player.sendMessage(ChatColor.GREEN + "Hat created with id '" + args[1] + "' and name '" + name + "'");
                     }
                     else {
@@ -56,7 +49,11 @@ public class HatsCommand implements CommandExecutor {
 
                 }
                 else if (first.equals("create")){
-                    player.sendMessage(ChatColor.RED + "/hats create <id> <hat-name>");
+                    player.sendMessage(ChatColor.RED + "/hats create <id> <rarity> <hat-name>");
+                }
+                else if (first.equals("rhat")){
+                    player.sendMessage("heres a random hat");
+                    player.getInventory().addItem(CreateHat.createHat());
                 }
             }
             else {
@@ -76,10 +73,11 @@ public class HatsCommand implements CommandExecutor {
                     meta.addAttributeModifier(Attribute.GENERIC_ARMOR,
                             new AttributeModifier(UUID.randomUUID(), "armor", 3, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD));
                     meta.setCustomModelData(Integer.parseInt(entry.getKey()));
-                    meta.setDisplayName(entry.getValue().toString());
+                    List<String> values = HatsListFile.getHats().getStringList(entry.getKey());
+                    meta.setDisplayName(values.get(0));
+                    meta.setLore(List.of(ChatColor.BOLD + "" + ChatColor.WHITE + "Rarity: " + values.get(1)));
 
                     stack.setItemMeta(meta);
-                    player.sendMessage(stack.getItemMeta().hasCustomModelData() + "k");
                     inventory.addItem(stack);
                     count++;
                 }

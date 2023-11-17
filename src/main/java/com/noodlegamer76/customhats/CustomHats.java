@@ -3,6 +3,7 @@ package com.noodlegamer76.customhats;
 import com.noodlegamer76.customhats.commands.GodCommand;
 import com.noodlegamer76.customhats.commands.HatsCommand;
 import com.noodlegamer76.customhats.files.HatsListFile;
+import com.noodlegamer76.customhats.listeners.EntitySpawnListener;
 import com.noodlegamer76.customhats.listeners.HatEnchanting;
 import com.noodlegamer76.customhats.listeners.PlayerInteractListener;
 import com.noodlegamer76.customhats.listeners.TestEvent;
@@ -29,6 +30,7 @@ public final class CustomHats extends JavaPlugin {
 
         //event listeners
         getServer().getPluginManager().registerEvents(new TestEvent(), this);
+        getServer().getPluginManager().registerEvents(new EntitySpawnListener(), this);
         getServer().getPluginManager().registerEvents(new HatEnchanting(), this);
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
 

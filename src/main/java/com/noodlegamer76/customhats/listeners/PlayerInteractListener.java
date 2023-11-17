@@ -1,6 +1,7 @@
 package com.noodlegamer76.customhats.listeners;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,11 +17,19 @@ public class PlayerInteractListener implements Listener {
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
 
         ItemStack item = event.getItem();
+        Player player = event.getPlayer();
 
-        if (item != null) {
+        if (item != null && item.hasItemMeta()) {
+            if (item.getType() == Material.DIAMOND_HELMET && item.getItemMeta().hasCustomModelData()) {
+                item.setType(Material.KNOWLEDGE_BOOK);
+            }
             if (item.getType().equals(Material.KNOWLEDGE_BOOK)) {
 
-                event.setUseItemInHand(Event.Result.DENY);
+                if (player.getInventory().getHelmet() == null) {
+                    player.getInventory().setHelmet(item);
+                    item.setAmount(0);
+                }
+
                 event.setCancelled(true);
             }
         }
