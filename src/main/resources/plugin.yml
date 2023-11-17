@@ -3,3 +3,20 @@ version: '${version}'
 main: com.noodlegamer76.customhats.CustomHats
 api-version: '1.20'
 authors: [noodlegamer76]
+commands:
+  god:
+    description: Enable/Disable God Mode
+    usage: /<command> [Enable|Disable]
+    permission: customhats.godmode
+  hats:
+    description: Open the hats GUI
+    usage: /<command>
+    permission: customhats.hats
+
+permissions:
+  customhats.godmode:
+    description: Allows usage of god mode
+    default: op
+  customhats.hats:
+    description: Opens hats GUI
+    default: op
