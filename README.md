@@ -22,7 +22,7 @@ commands:
  
 creating a hat:
 
-/hats create <ID> <Rarity> <Name>
+/hats create [ID] [Rarity] [Name]
 ID: needs to be a number, and will be used as the custom model data
 Rarity: read features above, the rarities in order are "common", "uncommon", "rare", "uber", "legendary" and are case sensitive
 Name: Can be as long as you want
