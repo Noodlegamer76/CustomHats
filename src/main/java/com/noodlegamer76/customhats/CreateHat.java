@@ -29,7 +29,6 @@ public class CreateHat {
     private static Map<String, Object> map = hats.getValues(false);
 
     public static ItemStack createHat() {
-        System.out.println("create hat");
         HatsListFile.reload();
 
 
@@ -49,46 +48,31 @@ public class CreateHat {
             meta.setCustomModelData(Integer.parseInt(entry.getKey()));
             List<String> values = HatsListFile.getHats().getStringList(entry.getKey());
             meta.setDisplayName(values.get(0));
-            meta.setLore(List.of(ChatColor.BOLD + "" + ChatColor.WHITE + "Rarity: " + values.get(1)));
+            meta.setLore(List.of(ChatColor.BOLD + "" + ChatColor.WHITE + "Rarity: " + getRarityMessage(values.get(1))));
 
             stack.setItemMeta(meta);
 
-            System.out.println(rarity + " compared to " + values.get(1));
             if (rarity.equals(values.get(1))) {
-                System.out.println("RARITY ADD");
-                System.out.println(stack == null);
-                System.out.println(hats == null);
                 hats.add(stack);
             }
             else if (RCOMMON.equals(values.get(1))) {
-                System.out.println("COMMON ADD");
                 hatscommon.add(stack);
-            }
-            else {
-                System.out.println("not equal");
             }
         }
 
-        System.out.println("returning");
         if (hats.isEmpty()) {
-            System.out.println("hats empty, choosing common");
             if (hatscommon.size() >= 2) {
-                System.out.println("multiple common hats");
                 return hatscommon.get(new Random().nextInt(0, hatscommon.size()));
             }
             else {
-                System.out.println("one common hat");
                 return hatscommon.get(0);
             }
         }
         else {
-            System.out.println("hats not emty");
             if (hats.size() >= 2) {
-                System.out.println("hats size >= 1");
                 return hats.get(new Random().nextInt(0, hats.size()));
             }
             else {
-                System.out.println("one hat");
                 return hats.get(0);
             }
         }
@@ -107,5 +91,14 @@ public class CreateHat {
             case 6: return RLEGENDARY;
             default: return RCOMMON;
         }
+    }
+
+    public static String getRarityMessage(String rarity) {
+        if (rarity.equals("common")) return COMMON;
+        if (rarity.equals("uncommon")) return UNCOMMON;
+        if (rarity.equals("rare")) return RARE;
+        if (rarity.equals("uber")) return UBER;
+        if (rarity.equals("legendary")) return LEGENDARY;
+        else return "UNKNOWN RARITY: PLEASE CONTACT NOODLEGAMER76 ";
     }
 }

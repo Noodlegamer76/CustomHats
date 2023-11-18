@@ -75,7 +75,7 @@ public class HatsCommand implements CommandExecutor {
                     meta.setCustomModelData(Integer.parseInt(entry.getKey()));
                     List<String> values = HatsListFile.getHats().getStringList(entry.getKey());
                     meta.setDisplayName(values.get(0));
-                    meta.setLore(List.of(ChatColor.BOLD + "" + ChatColor.WHITE + "Rarity: " + values.get(1)));
+                    meta.setLore(List.of(ChatColor.BOLD + "" + ChatColor.WHITE + "Rarity: " + CreateHat.getRarityMessage(values.get(1))));
 
                     stack.setItemMeta(meta);
                     inventory.addItem(stack);

@@ -18,7 +18,6 @@ public class EntitySpawnListener implements Listener {
     @EventHandler
     public static void onEntitySpawn(EntitySpawnEvent event) {
         if (event.getEntityType() == EntityType.WANDERING_TRADER) {
-            System.out.println("trader spawn");
             WanderingTrader trader = (WanderingTrader) event.getEntity();
             //trader.setRecipe(trader.getRecipeCount() - 1, new MerchantRecipe(CreateHat.createHat(), 1));
             List<MerchantRecipe> recipeList = trader.getRecipes();
@@ -26,16 +25,16 @@ public class EntitySpawnListener implements Listener {
             MerchantRecipe recipe = new MerchantRecipe(CreateHat.createHat(), 1);
             recipe.addIngredient(new ItemStack(Material.DIAMOND_HELMET));
             switch ((int) (Math.random() * 10)) {
-                case 1: recipe.addIngredient(new ItemStack(Material.DIAMOND, 6));
-                case 2: recipe.addIngredient(new ItemStack(Material.GOLD_INGOT, 12));
-                case 3: recipe.addIngredient(new ItemStack(Material.IRON_INGOT, 32));
-                case 4: recipe.addIngredient(new ItemStack(Material.NETHERITE_INGOT, 1));
-                case 5: recipe.addIngredient(new ItemStack(Material.DIAMOND, 16));
-                case 6: recipe.addIngredient(new ItemStack(Material.REDSTONE, 64));
-                case 7: recipe.addIngredient(new ItemStack(Material.ANVIL, 1));
-                case 8: recipe.addIngredient(new ItemStack(Material.DIAMOND, 12));
-                case 9: recipe.addIngredient(new ItemStack(Material.EMERALD, 16));
-                default: recipe.addIngredient(new ItemStack(Material.EMERALD, 12));
+                case 1: recipe.addIngredient(new ItemStack(Material.DIAMOND, 6)); break;
+                case 2: recipe.addIngredient(new ItemStack(Material.GOLD_INGOT, 12)); break;
+                case 3: recipe.addIngredient(new ItemStack(Material.IRON_INGOT, 32)); break;
+                case 4: recipe.addIngredient(new ItemStack(Material.NETHERITE_INGOT, 1)); break;
+                case 5: recipe.addIngredient(new ItemStack(Material.DIAMOND, 16)); break;
+                case 6: recipe.addIngredient(new ItemStack(Material.REDSTONE, 64)); break;
+                case 7: recipe.addIngredient(new ItemStack(Material.ANVIL, 1)); break;
+                case 8: recipe.addIngredient(new ItemStack(Material.DIAMOND, 12)); break;
+                case 9: recipe.addIngredient(new ItemStack(Material.EMERALD, 16)); break;
+                default: recipe.addIngredient(new ItemStack(Material.EMERALD, 12)); break;
             }
             recipes.add(recipe);
             trader.setRecipes(recipes);
