@@ -28,3 +28,4 @@ Rarity: read features above, the rarities in order are "common", "uncommon", "ra
 Name: Can be as long as you want
 
 if you mess up anything in that command, eg. putting a letter in the id, or mispelling a rarity name, you will have to change it in the config
+if you want to remove a hat you also need to go into the config
